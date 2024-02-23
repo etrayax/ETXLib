@@ -4,3 +4,6 @@ from .inline_keyboard_markup import InlineKeyboardMarkup
 from .login_url import LoginUrl
 from .reaction_type_emoji import ReactionTypeEmoji
 from .web_app_info import WebAppInfo
+from .message import Message
+from .chat import Chat
+from .user import User
