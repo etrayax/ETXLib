@@ -9,7 +9,7 @@ class WebAppInfo(DictType):
     
     Parameters :
     
-        url (String) : An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps
+        url (String) => Required : An HTTPS URL of a Web App to be opened with additional data as specified in Initializing Web Apps
     
     """
     

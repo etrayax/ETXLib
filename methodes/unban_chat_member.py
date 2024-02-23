@@ -1,4 +1,5 @@
-from ..utils import *
+from ETXLib.Request import Request
+from typing import Union
 
 class unbanChatMember:
     
@@ -7,9 +8,9 @@ class unbanChatMember:
         
         Parameters:
         
-            chat_id (Integer or String) => Yes : Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
+            chat_id (Integer or String) => Required : Unique identifier for the target group or username of the target supergroup or channel (in the format @channelusername)
                 
-            user_id (Integer) => Yes : Unique identifier of the target user
+            user_id (Integer) => Required : Unique identifier of the target user
             
             only_if_banned (Boolean) => Optional : Do nothing if the user is not banned
     """

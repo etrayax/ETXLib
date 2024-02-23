@@ -8,7 +8,7 @@ class InlineKeyboardMarkup(DictType):
 
     Parameters : 
 
-        inline_keyboard (List[List["types.InlineKeyboardButton"]]) : Array of button rows, each represented by an Array of InlineKeyboardButton objects
+        inline_keyboard (List[List["types.InlineKeyboardButton"]]) => Required : Array of button rows, each represented by an Array of InlineKeyboardButton objects
     
     """
     

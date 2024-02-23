@@ -1,4 +1,6 @@
-from ..utils import *
+from ETXLib.Request import Request
+from typing import Union
+
 
 class promoteChatMember:
     
@@ -8,9 +10,9 @@ class promoteChatMember:
 
     Parameters :
 
-        chat_id	(Integer or String) => Yes: Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+        chat_id	(Integer or String) => Required: Unique identifier for the target chat or username of the target channel (in the format @channelusername)
             
-        user_id (Integer) => Yes: Unique identifier of the target user
+        user_id (Integer) => Required: Unique identifier of the target user
             
         is_anonymous (Boolean) => Optional: Pass True if the administrator's presence in the chat is hidden
 

@@ -1,4 +1,4 @@
-from ..utils import *
+from ETXLib.Request import Request
 
 class deleteWebhook:
     

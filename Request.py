@@ -1,6 +1,6 @@
 from typing    import Literal
 from threading import Thread
-from .utils     import ObjType
+from .utils     import CustomObject
 
 import httpx
 import orjson
@@ -97,9 +97,9 @@ async def Request(method: Literal["post", "get"] = "post", *args, **kwargs):
     match method:
         
         case "post":
-            return ObjType(orjson.loads(c) if not isinstance((c := await post_req(*args, **kwargs)), dict) else c)
+            return CustomObject(orjson.loads(c) if not isinstance((c := await post_req(*args, **kwargs)), dict) else c)
             
         case "get":
-            return ObjType(orjson.loads(c) if not isinstance((c := await get_req(*args, **kwargs)), dict) else c)
+            return CustomObject(orjson.loads(c) if not isinstance((c := await get_req(*args, **kwargs)), dict) else c)
             
     raise ValueError("The method is not valid.")

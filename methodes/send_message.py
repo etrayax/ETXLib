@@ -1,7 +1,8 @@
-from ..utils import *
+from ETXLib.Request import Request
+from ETXLib import types
+from typing import Union, List
 
 class sendMessage:
-    
     
     """
     
@@ -10,15 +11,15 @@ class sendMessage:
 
     Parameters:
     
-        chat_id (Integer) => Yes : Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+        chat_id (Integer) => Required : Unique identifier for the target chat or username of the target channel (in the format @channelusername)
         
         message_thread_id (Integer) => Optional : Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
         
-        text (String) => Yes : ext of the message to be sent, 1-4096 characters after entities parsing
+        text (String) => Required : ext of the message to be sent, 1-4096 characters after entities parsing
         
         parse_mode (String) => Optional : Mode for parsing entities in the message text. See formatting options for more details.
         
-        entities (Array of MessageEntity) => Optional : A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode
+        entities (List["types.MessageEntity"]) => Optional : A JSON-serialized list of special entities that appear in message text, which can be specified instead of parse_mode
         
            
         disable_web_page_preview (Boolean) => Optional : Disables link previews for links in this message
@@ -31,7 +32,7 @@ class sendMessage:
             
         allow_sending_without_reply (Boolean) => Optional : Pass True if the message should be sent even if the specified replied-to message is not found  
            
-        reply_markup (Optional) => InlineKeyboardMarkup or ReplyKeyboardMarkup or ReplyKeyboardRemove or ForceReply : Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user.        
+        reply_markup (Union["types.InlineKeyboardMarkup", "types.ReplyKeyboardMarkup", "types.ReplyKeyboardRemove", "types.ForceReply"]) => Optional : Additional interface options. A JSON-serialized object for an inline keyboard, custom reply keyboard, instructions to remove reply keyboard or to force a reply from the user.        
            
     """
     
@@ -41,13 +42,13 @@ class sendMessage:
         text,
         message_thread_id : int = None,
         parse_mode : str = "html",
-        entities = None,
+        entities : List["types.MessageEntity"] = None,
         disable_web_page_preview : bool = None,
         disable_notification : bool = None,
         protect_content : bool = None,
-        reply_to_message_id = None,
+        reply_to_message_id : int = None,
         allow_sending_without_reply : bool = None,
-        reply_markup : List[Type["InlineKeyboardMarkup"]] = None,
+        reply_markup : Union["types.InlineKeyboardMarkup", "types.ReplyKeyboardMarkup", "types.ReplyKeyboardRemove", "types.ForceReply"] = None,
         *,
         api: str = None,
         result: bool = None

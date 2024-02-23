@@ -1,4 +1,6 @@
-from ..utils import *
+from ETXLib.Request import Request
+from ETXLib import types
+from typing import Union, List
 
 class setMessageReaction:
     
@@ -8,11 +10,11 @@ class setMessageReaction:
     
     Parameters:
     
-        chat_id (Integer or String) => Yes : Unique identifier for the target chat or username of the target channel (in the format @channelusername)
+        chat_id (Integer or String) => Required : Unique identifier for the target chat or username of the target channel (in the format @channelusername)
             
-        message_id (Integer) => Yes : Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead.
+        message_id (Integer) => Required : Identifier of the target message. If the message belongs to a media group, the reaction is set to the first non-deleted message in the group instead.
 
-        reaction (Array of ReactionType) => Optional : New list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.
+        reaction (List["types.ReactionType"]) => Optional : New list of reaction types to set on the message. Currently, as non-premium users, bots can set up to one reaction per message. A custom emoji reaction can be used if it is either already present on the message or explicitly allowed by chat administrators.
 
         is_big (Boolean) => Optional : Pass True to set the reaction with a big animation
     
@@ -22,7 +24,7 @@ class setMessageReaction:
         self,
         chat_id : Union[str, int],
         message_id : int,
-        reaction = None,
+        reaction : List["types.ReactionType"] = None,
         is_big : bool = None,
         *,
         api: str = None,

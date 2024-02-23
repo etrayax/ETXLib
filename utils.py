@@ -1,30 +1,25 @@
-from typing import Any
 
-class ObjType:
+class CustomObject:
     
     def __init__(self, obj: dict) -> None:
         self.__data = obj
         
-    def __getattribute__(self, __name: str) -> Any:
+    def __getattr__(self, name: str):
+        obj = self.__data.get(name)
         
-        obj = object.__getattribute__(self, '_ObjType__data').get(__name)
-            
         if isinstance(obj, dict):
-            return ObjType(obj)
-
+            return CustomObject(obj)
         else:
             return obj
         
-    def __getitem__(self, __name: str):
+    def __getitem__(self, name: str):
+        obj = self.__data.get(name)
         
-        obj = object.__getattribute__(self, '_ObjType__data').get(__name)
-            
         if isinstance(obj, dict):
-            return ObjType(obj)
-
+            return CustomObject(obj)
         else:
             return obj
         
     def __str__(self) -> str:
-        return f"{object.__getattribute__(self, '_ObjType__data')}"
+        return f"{self.__data}"
 

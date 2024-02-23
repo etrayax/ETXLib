@@ -1,4 +1,6 @@
-from ..utils import *
+from ETXLib.Request import Request
+from ETXLib import types
+from typing import List
 
 class setWebhook:
     
@@ -11,13 +13,11 @@ class setWebhook:
 
     Parameters:
 
-        url (String) => Yes : HTTPS URL to send updates to. Use an empty string to remove webhook integration
+        url (String) => Required : HTTPS URL to send updates to. Use an empty string to remove webhook integration
         
         certificate (InputFile) => Optional : Upload your public key certificate so that the root certificate in use can be checked. See our self-signed guide for details.
-            
         
         ip_address (String) => Optional : The fixed IP address which will be used to send webhook requests instead of the IP address resolved through DNS
-            
         
         max_connections (Integer) => Optional : The maximum allowed number of simultaneous HTTPS connections to the webhook for update delivery, 1-100. Defaults to 40. Use lower values to limit the load on your bot's server, and higher values to increase your bot's throughput.
             
@@ -34,7 +34,7 @@ class setWebhook:
     async def set_webhook(
         self,
         url : str = None,
-        certificate = None,
+        certificate : "types.InputFile" = None,
         ip_address : str = None,
         max_connections : int = None,
         allowed_updates : List[str] = None,
@@ -44,6 +44,7 @@ class setWebhook:
         api: str = None,
         result: bool = None
     ):
+        
         return await Request(
             'post',
             url=(api or self.url) + "/setWebhook",
