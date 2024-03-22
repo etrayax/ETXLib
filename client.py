@@ -5,14 +5,15 @@ from hashlib      import md5
 import asyncio
 import json
 
-from .types import Update
+from .handlers.utils import BaseHandler
+
+from .types    import Update
 from .handlers import Decorators
 from .methodes import Methodes
-from .handlers.utils import BaseHandler
-from .utils import CustomObject
+from .objects  import ETXDict
 
 
-class Bot(Methodes):
+class Bot(Methodes, Decorators):
     
     def __init__(self, api, url, result):
         
@@ -21,6 +22,12 @@ class Bot(Methodes):
         self.api = api
         self.url = url
         self.result = result
+
+        self.handlers = {update_type: set() for update_type in Update.__init__.__code__.co_varnames[2:]}
+    
+    def add_handler(self, handler: BaseHandler):
+        self.handlers[handler.name].add(handler)
+        return handler
         
 
 class Client(web.Application, Decorators):
@@ -41,7 +48,7 @@ class Client(web.Application, Decorators):
         
         self.handlers = {update_type: set() for update_type in Update.__init__.__code__.co_varnames[2:]}
         
-    def register(self, bot_token: str, api: str = "https://api.telegram.org", result: bool = False):
+    def register(self, bot_token: str, api: str = "https://api.telegram.org", result: bool = False) -> "Bot":
         
         webhook_path = "/" + md5(bot_token.encode()).hexdigest()
         
@@ -56,6 +63,7 @@ class Client(web.Application, Decorators):
         )
         
         self.router.add_post(webhook_path, self.request_handler)
+        return self.connections[webhook_path[1:]]
         
     async def request_handler(self, request):
         
@@ -75,7 +83,7 @@ class Client(web.Application, Decorators):
                         tasks.append(
                             obj.func(
                                 self.connections[request.url.path.removeprefix("/")], 
-                                CustomObject(value)
+                                ETXDict(value)
                             )
                         )
                     

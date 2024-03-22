@@ -5,7 +5,7 @@ class CustomObject:
         self.__data = obj
         
     def __getattr__(self, name: str):
-        obj = self.__data.get(name)
+        obj = self.__data.get(name.replace('from_user', 'from'))
         
         if isinstance(obj, dict):
             return CustomObject(obj)
